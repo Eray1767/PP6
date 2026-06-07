@@ -103,9 +103,17 @@ Place your completed `print.sh` in `solutions/` and commit. Then link it here:
 #### Reflection Questions
 
 1. **What is the difference between `printf` and `echo` in Bash?**
+echo ist simpel, aber nicht immer zuverlässig, weil es je nach Shell unterschiedlich reagiert.
+printf ist genauer und formatiert Ausgaben immer gleich.
+Darum nimmt man printf, wenn die Ausgabe wirklich kontrolliert sein soll.
 2. **What is the role of `~/.bashrc` in your shell environment?**
+~/.bashrc wird geladen, sobald man ein neues Terminal öffnest.
+Darin stehen die persönlichen Einstellungen wie Aliases, PATH‑Anpassungen oder Funktionen.
+Es richtet die Bash‑Umgebung jedes Mal so ein, wie man sie haben will.
 3. **Explain the difference between sourcing (`source ~/.bashrc`) and executing (`./print.sh`).**
-
+Sourcen (source ~/.bashrc) führt die Datei im aktuellen Shell‑Prozess aus, sodass alle Variablen, Funktionen und PATH‑Änderungen sofort in der aktuellen Shell gelten.
+Ausführen (./print.sh) startet das Skript in einer eigenen Sub‑Shell, wodurch Änderungen nicht in die aktuelle Umgebung übernommen werden.
+Sourcen ändert die aktuelle Shell, Ausführen nicht.
 ---
 
 ### Task 2: GAS Printing (32‑bit Linux)
