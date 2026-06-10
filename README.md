@@ -103,9 +103,14 @@ Place your completed `print.sh` in `solutions/` and commit. Then link it here:
 #### Reflection Questions
 
 1. **What is the difference between `printf` and `echo` in Bash?**
+echo ist bequem, aber je nach Shell unzuverlässig, während printf präzise, portabel und professionell formatiert ausgibt.
 2. **What is the role of `~/.bashrc` in your shell environment?**
-3. **Explain the difference between sourcing (`source ~/.bashrc`) and executing (`./print.sh`).**
-
+~/.bashrc wird geladen, wenn man ein neues Terminal öffnet, und setzt die persönlichen Einstellungen wie Aliases,
+Funktionen oder PATH, damit die Bash so läuft, wie es soll.
+4. **Explain the difference between sourcing (`source ~/.bashrc`) and executing (`./print.sh`).**
+Sourcen (source ~/.bashrc) führt eine Datei in der aktuellen Shell aus, sodass alle gesetzten Variablen, Funktionen oder
+PATH‑Änderungen sofort in dieser Shell gelten. Ein Skript auszuführen (./print.sh) startet dagegen eine eigene Sub‑Shell,
+in der alle Änderungen nur dort wirken und nach dem Ende des Skripts wieder verschwinden.
 ---
 
 ### Task 2: GAS Printing (32‑bit Linux)
@@ -160,9 +165,14 @@ _start:
 #### Reflection Questions
 
 1. **What is a file descriptor and how does the OS use it?**
-2. **How can you obtain or duplicate a file descriptor for another resource (e.g., a file or socket)?**
-3. **What might happen if you use an invalid file descriptor in a syscall?**
-
+Ein File Descriptor ist eine kleine Nummer, mit der das Betriebssystem eine geöffnete Datei oder einen Datenstrom
+identifiziert. Programme lesen und schreiben nicht direkt in Dateien, sondern benutzen diese Nummer, damit das OS weiß,
+wohin Daten gehen oder woher sie kommen.
+3. **How can you obtain or duplicate a file descriptor for another resource (e.g., a file or socket)?**
+ Über Umleitungen und exec kannst du neue oder kopierte FDs für beliebige Ressourcen anlegen.
+4. **What might happen if you use an invalid file descriptor in a syscall?**
+Ein ungültiger File Descriptor führt einfach dazu, dass der Syscall sofort fehlschlägt und errno auf EBADF gesetzt wird –
+die Operation passiert nicht und nichts wird verändert.
 ---
 
 ### Task 3: C Printing
@@ -200,9 +210,13 @@ int main(void) {
 #### Reflection Questions
 
 1. **Use `objdump -d` on `print_c` to find the assembly instructions corresponding to your `printf` calls.**
-2. **Why is the syntax written differently from GAS assembly? Compare NASM vs. GAS notation.**
-3. **How could you use `fprintf` to write output both to `stdout` and to a file instead? Provide example code.**
-
+Mit objdump -d sieht man die printf‑Stellen als call printf im Assembly, zusammen mit den davor liegenden
+Argument‑Vorbereitungen wie mov oder lea, die der Compiler automatisch erzeugt.
+3. **Why is the syntax written differently from GAS assembly? Compare NASM vs. GAS notation.**
+NASM nutzt die Intel‑Syntax ohne Präfixe und mit Ziel‑vor‑Quelle, während GAS die AT&T‑Syntax verwendet, bei der Register
+ein %, Immediate‑Werte ein $ haben und die Operandenreihenfolge umgekehrt ist.
+4. **How could you use `fprintf` to write output both to `stdout` and to a file instead? Provide example code.**
+indem man die Datei mit fopen öffnet und dann zweimal fprintf nutzt – einmal für stdout und einmal für den Datei‑Pointer. 
 ---
 
 ### Task 4: Python 3 Printing
@@ -242,8 +256,11 @@ if __name__ == "__main__":
 #### Reflection Questions
 
 1. **Is Python’s print behavior closer to Bash, Assembly, or C? Explain.**
+Pythons printf ähnelt am meisten C, weil es letztlich über die Standard‑I/O‑Bibliothek (stdout) schreibt und
+Formatierung wie printf nutzt
 2. **Can you inspect a Python script’s binary with `objdump`? Why or why not?**
-
+Nein, ein Python‑Script kann man nicht mit objdump analysieren, weil es kein Binary ist, sondern reiner Text, der vom
+Python‑Interpreter ausgeführt wird
 ---
 
 **Remember:** Stop working after **90 minutes** and document where you stopped.
