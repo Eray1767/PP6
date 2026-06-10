@@ -169,7 +169,7 @@ Ein File Descriptor ist eine kleine Nummer, mit der das Betriebssystem eine geö
 identifiziert. Programme lesen und schreiben nicht direkt in Dateien, sondern benutzen diese Nummer, damit das OS weiß,
 wohin Daten gehen oder woher sie kommen.
 3. **How can you obtain or duplicate a file descriptor for another resource (e.g., a file or socket)?**
- Über Umleitungen und exec kannst du neue oder kopierte FDs für beliebige Ressourcen anlegen.
+ Über Umleitungen und exec kann man neue oder kopierte FDs für beliebige Ressourcen anlegen.
 4. **What might happen if you use an invalid file descriptor in a syscall?**
 Ein ungültiger File Descriptor führt einfach dazu, dass der Syscall sofort fehlschlägt und errno auf EBADF gesetzt wird –
 die Operation passiert nicht und nichts wird verändert.
